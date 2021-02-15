@@ -33,6 +33,7 @@ class Movie(TMDb):
         "similar": "/movie/%s/similar",
         "external": "/find/%s",
         "release_dates": "/movie/%s/release_dates",
+        "providers": "/movie/%s/watch/providers"
     }
 
     def details(
@@ -247,6 +248,21 @@ class Movie(TMDb):
             self._call(
                 self._urls["external"] % external_id,
                 "external_source=" + external_source,
+            ),
+            key=None,
+        )
+
+    def providers(self, movie_id, country=""):
+        """
+        Gets streaming providers that have the movie available.
+        :param movie_id: str
+        :param country str
+        :return:
+        """
+        return self._get_obj(
+            self._call(
+                self._urls["providers"] % movie_id,
+                "country=" + country,
             ),
             key=None,
         )

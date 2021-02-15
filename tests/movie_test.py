@@ -158,3 +158,7 @@ class MovieTests(unittest.TestCase):
             self.assertIn("id", movie)
             external_ids = self.movie.external_ids(movie["id"])
             self.assertEqual(external_ids["imdb_id"], "tt8155288")
+
+    def test_get_movie_providers(self):
+        providers = self.movie.providers(111)
+        self.assertIsNotNone(providers)
